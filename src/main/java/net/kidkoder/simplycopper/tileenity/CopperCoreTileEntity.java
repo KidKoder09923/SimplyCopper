@@ -5,10 +5,10 @@ import net.kidkoder.simplycopper.init.ModTileEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.*;
+import net.minecraft.util.text.ITextComponent;
 
 public class CopperCoreTileEntity extends TileEntity implements ITickableTileEntity {
-    public int x, y, z;
-    private int power = 0;
+    private long power = 0;
     private long tick;
     private boolean inited;
 
@@ -19,47 +19,38 @@ public class CopperCoreTileEntity extends TileEntity implements ITickableTileEnt
         this(ModTileEntityTypes.COPPER_CORE.get());
     }
 
-    public int getPower() {
+    public long getPower() {
         return power;
     }
 
-    public void setPower(int power) {
+    public void setPower(long power) {
         this.power = power;
     }
 
     public void tick() {
         if(!inited) init();
         tick++;
-        if(tick==6000 && power > 0) {
+        if(power > 100 & tick == 1200) {
             power--;
         }
     }
 
     private void init() {
         inited  = true;
-        x = this.pos.getX();
-        y = this.pos.getY();
-        z = this.pos.getZ();
         tick = 0;
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.put("initvalue", NBTHelper.coreToNBT(this));
-        return super.write(compound);
+        super.write(compound);
+        compound.putLong("power", power);
+        return compound;
     }
 
     @Override
     public void func_230337_a_(BlockState state, CompoundNBT nbt) {
-        CompoundNBT inits = nbt.getCompound("initvalue");
-        if(inits != null) {
-            this.x = nbt.getInt("x");
-            this.y = nbt.getInt("y");
-            this.z = nbt.getInt("z");
-            tick = 0;
-            inited = true;
-            return;
-        }
-        init();
+        super.func_230337_a_(state, nbt);
+        this.power = nbt.getInt("power");
     }
+
 }
