@@ -43,6 +43,7 @@ public class BatteryItem extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
+        tooltip.add(new StringTextComponent("Power" + power));
     }
 
     @Override
@@ -50,8 +51,15 @@ public class BatteryItem extends Item {
         try {
             TileEntity core = context.getWorld().getTileEntity(context.getPos());
             if(core.getType() == ModTileEntityTypes.COPPER_CORE.get()) {
-                SimplyCopperMod.LOGGER.debug("Copper core detected");
                 CopperCoreTileEntity coreTileEntity = (CopperCoreTileEntity) core;
+                if(coreTileEntity.getPower() > 1 && !context.getPlayer().isSneaking()) {
+                    power += 1;
+                    coreTileEntity.setPower(coreTileEntity.getPower() - 1);
+                }
+                if(context.getPlayer().isSneaking()) {
+                    power += coreTileEntity.getPower();
+                    coreTileEntity.setPower(0);
+                }
             }
         } catch (Exception e) {}
         return super.onItemUse(context);
