@@ -1,5 +1,6 @@
 package net.kidkoder.simplycopper.init;
 
+import net.kidkoder.simplycopper.item.BatteryItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -13,6 +14,7 @@ public class ItemInit {
     public static Item COPPER_ORE_ITEM;
     public static Item COPPER_BLOCK_ITEM;
     public static Item COPPER_CORE_ITEM;
+    public static Item BATTERY;
 
     @SubscribeEvent
     public static void registerItemBlocks(RegistryEvent.Register<Item> e) {
@@ -25,7 +27,8 @@ public class ItemInit {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(
-                COPPER_INGOT = new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName("copper_ingot")
+                COPPER_INGOT = new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName("copper_ingot"),
+                BATTERY = new BatteryItem(new Item.Properties().group(ItemGroup.MISC)).setRegistryName("battery")
         );
     }
 }
