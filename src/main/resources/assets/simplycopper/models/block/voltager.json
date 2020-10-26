@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "simplycopper:block/voltager_top",
+    "bottom": "simplycopper:block/voltager_top",
+    "side": "simplycopper:block/voltager_side",
+    "north": "simplycopper:block/voltager_side"
+  }
+}

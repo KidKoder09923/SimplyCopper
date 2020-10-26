@@ -5,5 +5,8 @@
   "item.simplycopper.copper_block": "Copper Block",
   "block.simplycopper.copper_block": "Copper Block",
   "item.simplycopper.copper_core": "Copper Core",
-  "block.simplycopper.copper_core": "Copper Core"
+  "block.simplycopper.copper_core": "Copper Core",
+  "item.simplycopper.voltager": "Voltager",
+  "block.simplycopper.voltager": "Voltager",
+  "item.simplycopper.copper_pickaxe": "Copper Pickaxe"
 }
